@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { PrismaConnect } from './prisma.connect';
+import { PrismaPostgres } from './prisma.postgres';
 
 @Module({
-  providers: [PrismaConnect],
+  providers: [PrismaPostgres],
 })
 export class PrismaModule {}
