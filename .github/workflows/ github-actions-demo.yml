@@ -1,4 +1,5 @@
-name: Nest Cli Docker
+name: Nest CLI Docker
+
 on:
   push:
     branches: [main]
@@ -7,24 +8,21 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:24.0.2
-        options: --privileged
+
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout do código
         uses: actions/checkout@v4
 
-      - name: 🐳 Setup Docker Compose
-        uses: |
-          docker-compose -f docker-compose.yml up -d --wait
+      - name: 📝 Copiar env para CI
+        run: cp .env.ci .env
+
+      - name: 🐳 Subir Docker Compose
+        run: docker-compose -f docker-compose.yml up -d --build
 
       - name: 🕒 Aguardar serviços subirem
         run: |
           echo "Aguardando Postgres e Redis..."
-          sleep 15
+          sleep 20
+
       - name: 📋 Verificar containers ativos
         run: docker ps
-
-      - name: Copiar env para CI
-        run: cp .env.ci .env
