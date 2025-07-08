@@ -1,37 +1,30 @@
-name: Nest Cli
-on: [push, pull_request]
+name: Nest Cli Docker
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
     services:
-      redis:
-        image: redis:8.0
-        ports:
-          - "16379:6379"
-        options: >-
-          --restart always
-          --command [ "redis-server", "--requirepass", "${{ secrets.REDIS_PASSWORD }}" ]
-      postgres_database:
-        image: postgres:17
-        ports:
-          - "15431:5432"
-        env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        options: >-
-          --health-cmd "pg_isready -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }}"
-          --health-interval 10s
-          --health-retries 5
-
+      docker:
+        image: docker:24.0.2
+        options: --privileged
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Setup Docker Compose
+        uses: |
+          docker-compose -f docker-compose.yml up -d --wait
+
+      - name: 🕒 Aguardar serviços subirem
+        run: |
+          echo "Aguardando Postgres e Redis..."
+          sleep 15
+      - name: 📋 Verificar containers ativos
+        run: docker ps
+
+      - name: Copiar env para CI
+        run: cp .env.ci .env
