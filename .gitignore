@@ -3,6 +3,7 @@
 /node_modules
 /build
 /prisma/generated
+package-lock.json
 
 # Logs
 logs
