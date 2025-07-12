@@ -1,10 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { CreateUsersService } from './services/create.users.service';
+import { ListUsersByIdService } from './services/list.users.by.id.service';
 import { User } from '../../../prisma/generated/client/postgres';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly createUsersService: CreateUsersService) {}
+  constructor(private readonly createUsersService: ListUsersByIdService) {}
 
   @Get()
   findAll(): string {
