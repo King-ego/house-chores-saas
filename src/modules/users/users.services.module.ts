@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UsersRepositoryModule } from './repositories/users.repository.module';
-import { CreateUsersService } from './services/create.users.service';
+import { ListUsersByIdService } from './services/list.users.by.id.service';
 
 @Module({
   imports: [UsersRepositoryModule],
-  providers: [CreateUsersService],
-  exports: [CreateUsersService],
+  providers: [ListUsersByIdService],
+  exports: [ListUsersByIdService],
 })
 export class UsersServicesModule {}
