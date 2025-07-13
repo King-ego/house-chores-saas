@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ListUsersByIdService } from './services/list.users.by.id.service';
+import { ListUsersByIdService } from './services/list-users-by-id/list-users-by-id.service';
 import { User } from '../../../prisma/generated/client/postgres';
 
 @Controller('users')
