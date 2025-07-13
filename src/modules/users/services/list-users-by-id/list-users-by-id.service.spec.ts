@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ListUsersByIdService } from './list.users.by.id.service';
+import { ListUsersByIdService } from './list-users-by-id.service';
 
 describe('ListUsersByIdService', () => {
   let service: ListUsersByIdService;
