@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Param,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { ListUsersByIdService } from './services/list-users-by-id/list-users-by-id.service';
 import { User } from '../../../prisma/generated/client/postgres';
 import { CreateUserService } from './services/create-user/create-user.service';
@@ -17,8 +24,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  public async findOne(): Promise<User> {
-    const user = await this.listUsersService.execute('1');
+  public async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
+    const user = await this.listUsersService.execute(id);
     return user;
   }
 
