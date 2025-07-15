@@ -24,7 +24,9 @@ export class UsersController {
   }
 
   @Get(':id')
-  public async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
+  public async findOne(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+  ): Promise<User> {
     const user = await this.listUsersService.execute(id);
     return user;
   }
