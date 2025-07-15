@@ -13,7 +13,13 @@ export class PropertyRepositories implements PropertyContractor {
 
   public async create_property(property: CreatePropertyInput): Promise<void> {
     await this.postgresOrm.property.create({
-      data: property,
+      data: {
+        ...property,
+        users: {
+          connect: { id: property.created_by },
+        },
+      },
+      include: { users: true },
     });
   }
 }
