@@ -10,7 +10,8 @@ interface CreateUserRequest {
 export class CreateUserService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  public async execute(user: CreateUserRequest): Promise<void> {
+  public async execute(user: CreateUserRequest): Promise<string> {
     await this.usersRepository.createUser(user);
+    return 'create user successfully';
   }
 }
