@@ -37,3 +37,15 @@ model Property {
 
   @@map("properties")
 }
+
+model InviteUser {
+  id            String   @id @default(uuid())
+  email         String
+  property_id   String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  invited_by_id String
+  expires_at    DateTime
+
+  @@map("invite_users")
+}
