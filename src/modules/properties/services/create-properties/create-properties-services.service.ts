@@ -9,12 +9,10 @@ interface CreatePropertyRequest {
 
 @Injectable()
 export class CreatePropertiesServicesService {
-  constructor(
-    private readonly propertiesRepository: PropertyRepositories
-  ) {
-  }
+  constructor(private readonly propertiesRepository: PropertyRepositories) {}
 
   public async execute(property: CreatePropertyRequest): Promise<void> {
+    console.log(property);
     await this.propertiesRepository.create_property(property);
   }
 }
