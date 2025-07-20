@@ -8,7 +8,7 @@ interface CreatePropertyRequest {
 }
 
 @Injectable()
-export class CreatePropertiesServicesService {
+export class CreatePropertiesService {
   constructor(private readonly propertiesRepository: PropertyRepositories) {}
 
   public async execute(property: CreatePropertyRequest): Promise<void> {
