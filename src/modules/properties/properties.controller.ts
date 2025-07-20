@@ -1,11 +1,11 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createPropertyDto';
-import { CreatePropertiesServicesService } from './services/create-properties/create-properties-services.service';
+import { CreatePropertiesService } from './services/create-properties/create-properties.service';
 
 @Controller('properties')
 export class PropertiesController {
   constructor(
-    private readonly createPropertiesServicesService: CreatePropertiesServicesService,
+    private readonly createPropertiesServicesService: CreatePropertiesService,
   ) {}
 
   @Post('')
