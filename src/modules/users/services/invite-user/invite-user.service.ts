@@ -13,6 +13,7 @@ export class InviteUserService {
 
   public async execute(inviteUser: InviteUserRequest): Promise<void> {
     const expiresAt = new Date();
+    console.log(inviteUser.invited_by_id);
 
     await this.inviteUsersRepository.createInviteUser({
       ...inviteUser,
