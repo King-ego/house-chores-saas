@@ -7,15 +7,15 @@ export class InviteUsersController {
   constructor(private readonly inviteUserService: InviteUserService) {}
 
   @Post('/invite/property')
-  public inviteUserByProperty(@Body() inviteUser: InviteUserPropertyDto) {
+  public async inviteUserByProperty(@Body() inviteUser: InviteUserPropertyDto) {
     const invite = {
       invited_by_id: inviteUser.invited_by_id,
       property_id: inviteUser.property_id,
       email: inviteUser.email,
     };
 
-    this.inviteUserService.execute(invite);
+    await this.inviteUserService.execute(invite);
 
-    return { message: 'This action invites a user by property' };
+    return { message: 'This action invites a user by property 2' };
   }
 }
