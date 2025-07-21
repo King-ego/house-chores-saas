@@ -37,6 +37,7 @@ export class UsersController {
       name: createUser.name,
       email: createUser.email,
     };
+    console.log({ user, ass: 'dsds' });
 
     await this.createUsersService.execute(user);
     return { message: 'This action creates a user' };
