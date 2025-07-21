@@ -45,7 +45,6 @@ describe('UsersController', () => {
     const createUserDto = { name: 'John Doe', email: 'jhondoe@gmail.com' };
     const result = await controller.createUser({ ...createUserDto });
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(createUsersService.execute).toHaveBeenCalledWith(createUserDto);
 
     expect(result).toEqual({ message: 'This action creates a user' });
