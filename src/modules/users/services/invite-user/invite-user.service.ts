@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InviteUsersRepository } from '../../repositories/invite-users.repository';
 
 interface InviteUserRequest {
   email: string;
@@ -8,9 +9,15 @@ interface InviteUserRequest {
 
 @Injectable()
 export class InviteUserService {
-  constructor() {}
+  constructor(private readonly inviteUsersRepository: InviteUsersRepository) {}
 
-  execute(inviteUser: InviteUserRequest): void {
+  public async execute(inviteUser: InviteUserRequest): Promise<void> {
+    const expiresAt = new Date();
+
+    await this.inviteUsersRepository.createInviteUser({
+      ...inviteUser,
+      expires_at: expiresAt,
+    });
     console.log({ inviteUser });
   }
 }
