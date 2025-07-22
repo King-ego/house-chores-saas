@@ -12,11 +12,11 @@ export class InviteUserService {
   constructor(private readonly inviteUsersRepository: InviteUsersRepository) {}
 
   public async execute(inviteUser: InviteUserRequest): Promise<void> {
-    const expiresAt = new Date();
+    const expires_at = new Date();
 
     await this.inviteUsersRepository.createInviteUser({
       ...inviteUser,
-      expires_at: expiresAt,
+      expires_at,
     });
   }
 }
