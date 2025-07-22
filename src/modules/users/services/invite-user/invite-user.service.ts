@@ -18,6 +18,5 @@ export class InviteUserService {
       ...inviteUser,
       expires_at: expiresAt,
     });
-    console.log({ inviteUser });
   }
 }
