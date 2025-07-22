@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CreatePropertyDto } from './dto/createPropertyDto';
-import { CreatePropertiesService } from './services/create-properties/create-properties.service';
+import { CreatePropertyDto } from '../../dto/createPropertyDto';
+import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
 
 @Controller('properties')
 export class PropertiesController {
