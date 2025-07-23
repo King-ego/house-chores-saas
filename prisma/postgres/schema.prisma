@@ -49,3 +49,15 @@ model InviteUser {
 
   @@map("invite_users")
 }
+
+model Notification {
+  id          String   @id @default(uuid())
+  user_id     String
+  type        String
+  content     String
+  read        Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("notifications")
+}
