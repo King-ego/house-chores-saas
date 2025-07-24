@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PropertyRepositories } from '../../repositories/property.repositories';
+import { PropertyRepositories } from '../../repositories/properties/property.repositories';
 
 interface CreatePropertyRequest {
   name: string;
