@@ -7,7 +7,7 @@ import {
 } from '../../../../shared/prisma/prisma.orm';
 
 @Injectable()
-export class NotificationsService {
+export class NotificationsRepository {
   private readonly postgresOrm: PostgresClient;
 
   constructor() {
