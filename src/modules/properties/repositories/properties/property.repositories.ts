@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PostgresClient, PrismaOrm } from '../../../shared/prisma/prisma.orm';
-import PropertyContractor from '../contractors/property.contractor';
-import CreatePropertyInput from '../contractors/inputs/create.property.input';
+import { PostgresClient, PrismaOrm } from '../../../../shared/prisma/prisma.orm';
+import PropertyContractor from '../../contractors/property.contractor';
+import CreatePropertyInput from '../../contractors/inputs/create.property.input';
 
 @Injectable()
 export class PropertyRepositories implements PropertyContractor {
