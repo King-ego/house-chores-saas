@@ -6,6 +6,7 @@ import {
   PostgresClient,
   PrismaOrm,
 } from '../../../../shared/prisma/prisma.orm';
+import { CreateNotificationInput } from '../../contractors/inputs/create.notification.input';
 
 @Injectable()
 export class NotificationsRepository implements NotificationsContractors {
@@ -20,6 +21,21 @@ export class NotificationsRepository implements NotificationsContractors {
   ): Promise<Notification[]> {
     return this.postgresOrm.notification.findMany({
       where: { user_id: userId },
+    });
+  }
+
+  public async createNotification(
+    data: CreateNotificationInput,
+  ): Promise<void> {
+    const { userId, content, type, read } = data;
+
+    await this.postgresOrm.notification.create({
+      data: {
+        user_id: userId,
+        content,
+        type,
+        read: read ?? false,
+      },
     });
   }
 }
