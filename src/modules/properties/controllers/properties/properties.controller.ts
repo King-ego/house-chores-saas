@@ -16,8 +16,9 @@ export class PropertiesController {
       created_by: createPropertyDto.created_by,
     };
 
-    await this.createPropertiesServicesService.execute(property);
+    const newProperty =
+      await this.createPropertiesServicesService.execute(property);
 
-    return { message: 'Property created successfully' };
+    return { property: newProperty };
   }
 }
