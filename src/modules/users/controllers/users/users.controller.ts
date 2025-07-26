@@ -38,6 +38,8 @@ export class UsersController {
       email: createUser.email,
     };
 
+    console.log(user);
+
     await this.createUsersService.execute(user);
     return { message: 'This action creates a user' };
   }
