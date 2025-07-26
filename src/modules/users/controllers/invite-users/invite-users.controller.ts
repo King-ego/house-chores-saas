@@ -6,7 +6,7 @@ import { InviteUserService } from '../../services/invite-user/invite-user.servic
 export class InviteUsersController {
   constructor(private readonly inviteUserService: InviteUserService) {}
 
-  @Post('/invite/property')
+  @Post('/')
   public async inviteUserByProperty(@Body() inviteUser: InviteUserPropertyDto) {
     const invite = {
       invited_by_id: inviteUser.invited_by_id,
