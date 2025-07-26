@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PropertyRepositories } from '../../repositories/properties/property.repositories';
+import { Property } from '../../../../../prisma/generated/client/postgres';
 
 interface CreatePropertyRequest {
   name: string;
@@ -11,7 +12,7 @@ interface CreatePropertyRequest {
 export class CreatePropertiesService {
   constructor(private readonly propertiesRepository: PropertyRepositories) {}
 
-  public async execute(property: CreatePropertyRequest): Promise<void> {
-    await this.propertiesRepository.create_property(property);
+  public async execute(property: CreatePropertyRequest): Promise<Property> {
+    return this.propertiesRepository.create_property(property);
   }
 }
