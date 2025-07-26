@@ -4,6 +4,7 @@
 /build
 /prisma/generated
 package-lock.json
+*.http
 
 # Logs
 logs
