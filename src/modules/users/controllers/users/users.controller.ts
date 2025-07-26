@@ -38,9 +38,7 @@ export class UsersController {
       email: createUser.email,
     };
 
-    console.log(user);
-
-    await this.createUsersService.execute(user);
-    return { message: 'This action creates a user' };
+    const newUser = await this.createUsersService.execute(user);
+    return { user: newUser };
   }
 }
