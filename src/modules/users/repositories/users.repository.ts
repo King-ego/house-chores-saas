@@ -20,8 +20,8 @@ export class UsersRepository implements UserContractor {
     `;
   }
 
-  public async createUser(user: CreateUserInput): Promise<void> {
-    await this.postgresOrm.user.create({
+  public async createUser(user: CreateUserInput): Promise<User> {
+    return this.postgresOrm.user.create({
       data: user,
     });
   }
