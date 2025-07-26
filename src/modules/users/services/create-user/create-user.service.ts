@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UsersRepository } from '../../repositories/users.repository';
+import { User } from '../../../../../prisma/generated/client/postgres';
 
 interface CreateUserRequest {
   name: string;
@@ -10,8 +11,7 @@ interface CreateUserRequest {
 export class CreateUserService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  public async execute(user: CreateUserRequest): Promise<string> {
-    await this.usersRepository.createUser(user);
-    return 'create user successfully';
+  public async execute(user: CreateUserRequest): Promise<User> {
+    return this.usersRepository.createUser(user);
   }
 }
