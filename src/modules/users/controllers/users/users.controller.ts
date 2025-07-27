@@ -38,8 +38,6 @@ export class UsersController {
       email: createUser.email,
     };
 
-    console.log(user);
-
     const newUser = await this.createUsersService.execute(user);
     return { user: newUser };
   }
