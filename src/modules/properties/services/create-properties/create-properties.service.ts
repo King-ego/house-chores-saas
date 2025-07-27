@@ -13,7 +13,6 @@ export class CreatePropertiesService {
   constructor(private readonly propertiesRepository: PropertyRepositories) {}
 
   public async execute(property: CreatePropertyRequest): Promise<Property> {
-    console.log(property);
     return this.propertiesRepository.create_property(property);
   }
 }
