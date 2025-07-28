@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InviteUsersRepository } from '../../repositories/invite-users.repository';
 import { NotificationsRepository } from '../../../notifications/repositories/notifications/notifications.repository';
 import { randomUUID } from 'crypto';
+import { UsersRepository } from '../../repositories/users.repository';
 
 interface InviteUserRequest {
   email: string;
@@ -14,6 +15,7 @@ export class InviteUserService {
   constructor(
     private readonly inviteUsersRepository: InviteUsersRepository,
     private readonly notificationsRepository: NotificationsRepository,
+    private readonly usersRepository: UsersRepository, // Assuming this is the correct repository for user-related operations
   ) {}
 
   public async execute(inviteUser: InviteUserRequest): Promise<void> {
@@ -23,6 +25,8 @@ export class InviteUserService {
       ...inviteUser,
       expires_at,
     });
+
+    const user = await this.usersRepository.findByFilter({ email: inviteUser.email });
 
     await this.notificationsRepository.createNotification({
       sender_id: inviteUser.invited_by_id,
