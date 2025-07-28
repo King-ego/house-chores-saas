@@ -22,5 +22,9 @@ export class InviteUserService {
       ...inviteUser,
       expires_at,
     });
+
+    /*await this.notificationsRepository.createNotification({
+
+    })*/
   }
 }
