@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InviteUsersRepository } from '../../repositories/invite-users.repository';
 import { NotificationsRepository } from '../../../notifications/repositories/notifications/notifications.repository';
+import { randomUUID } from 'crypto';
 
 interface InviteUserRequest {
   email: string;
@@ -23,8 +24,12 @@ export class InviteUserService {
       expires_at,
     });
 
-    /*await this.notificationsRepository.createNotification({
-
-    })*/
+    await this.notificationsRepository.createNotification({
+      sender_id: inviteUser.invited_by_id,
+      content: 'Você foi convidado para participar de um imóvel',
+      receiver_id: randomUUID(),
+      type: 'info',
+      read: false,
+    });
   }
 }
