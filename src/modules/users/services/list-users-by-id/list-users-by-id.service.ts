@@ -7,6 +7,6 @@ export class ListUsersByIdService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   public async execute(id: string): Promise<User> {
-    return this.usersRepository.findByFilter(id);
+    return this.usersRepository.findByFilter({ id });
   }
 }
