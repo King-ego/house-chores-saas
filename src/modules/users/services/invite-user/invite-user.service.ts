@@ -1,7 +1,6 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InviteUsersRepository } from '../../repositories/invite-users.repository';
 import { NotificationsRepository } from '../../../notifications/repositories/notifications/notifications.repository';
-import { randomUUID } from 'crypto';
 import { UsersRepository } from '../../repositories/users.repository';
 import { CustomerException } from '../../../../shared/errors/customerException';
 
@@ -41,7 +40,7 @@ export class InviteUserService {
     await this.notificationsRepository.createNotification({
       sender_id: inviteUser.invited_by_id,
       content: 'Você foi convidado para participar de um imóvel',
-      receiver_id: randomUUID(),
+      receiver_id: user.id,
       type: 'info',
       read: false,
     });
