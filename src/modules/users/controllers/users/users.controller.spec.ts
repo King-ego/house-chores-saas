@@ -2,15 +2,26 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { CreateUserService } from '../../services/create-user/create-user.service';
 import { ListUsersByIdService } from '../../services/list-users-by-id/list-users-by-id.service';
+import { randomUUID } from 'crypto';
 
 describe('UsersController', () => {
   let controller: UsersController;
   let createUsersService: jest.Mocked<CreateUserService>;
   let listUsersByIdService: jest.Mocked<ListUsersByIdService>;
 
+  const idMock = randomUUID();
+  const createdAtMock = new Date();
+  const updatedAtMock = new Date();
+  const mockCreatedUser = {
+    id: idMock,
+    name: 'John Doe',
+    email: 'jhondoe@gmail.com',
+    created_at: createdAtMock,
+    updated_at: updatedAtMock,
+  };
   beforeEach(async () => {
     const mockCreateUserService = {
-      execute: jest.fn(),
+      execute: jest.fn().mockResolvedValue(mockCreatedUser), // Mocking the return value
     };
     const mockListUsersByIdService = {
       execute: jest.fn(),
@@ -42,14 +53,11 @@ describe('UsersController', () => {
   });
 
   it('successfully created user', async () => {
-    const createUserDto = { name: 'John Doe', email: 'jhondoe@gmail.com' };
-    const mockCreatedUser = {
-      id: 'uuid-1234',
-      name: 'John Doe',
-      email: 'jhondoe@gmail.com',
-      created_at: new Date(),
-      updated_at: new Date(),
+    const createUserDto = {
+      name: mockCreatedUser.name,
+      email: mockCreatedUser.email,
     };
+
     const result = await controller.createUser({ ...createUserDto });
 
     expect(createUsersService.execute).toHaveBeenCalledWith(createUserDto);
