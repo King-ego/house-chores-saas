@@ -43,10 +43,17 @@ describe('UsersController', () => {
 
   it('successfully created user', async () => {
     const createUserDto = { name: 'John Doe', email: 'jhondoe@gmail.com' };
+    const mockCreatedUser = {
+      id: 'uuid-1234',
+      name: 'John Doe',
+      email: 'jhondoe@gmail.com',
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
     const result = await controller.createUser({ ...createUserDto });
 
     expect(createUsersService.execute).toHaveBeenCalledWith(createUserDto);
 
-    expect(result).toEqual({ message: 'This action creates a user' });
+    expect(result).toEqual({ user: mockCreatedUser });
   });
 });
