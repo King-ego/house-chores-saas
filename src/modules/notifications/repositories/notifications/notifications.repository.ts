@@ -20,18 +20,19 @@ export class NotificationsRepository implements NotificationsContractors {
     userId: string,
   ): Promise<Notification[]> {
     return this.postgresOrm.notification.findMany({
-      where: { user_id: userId },
+      where: { receiver_id: userId },
     });
   }
 
   public async createNotification(
     data: CreateNotificationInput,
   ): Promise<void> {
-    const { userId, content, type, read } = data;
+    const { content, type, read, sender_id, receiver_id } = data;
 
     await this.postgresOrm.notification.create({
       data: {
-        user_id: userId,
+        receiver_id,
+        sender_id,
         content,
         type,
         read: read ?? false,
