@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InviteUsersRepository } from '../../repositories/invite-users.repository';
 import { NotificationsRepository } from '../../../notifications/repositories/notifications/notifications.repository';
 import { randomUUID } from 'crypto';
 import { UsersRepository } from '../../repositories/users.repository';
+import { CustomerException } from '../../../../shared/errors/customerException';
 
 interface InviteUserRequest {
   email: string;
@@ -26,7 +27,16 @@ export class InviteUserService {
       expires_at,
     });
 
-    const user = await this.usersRepository.findByFilter({ email: inviteUser.email });
+    const user = await this.usersRepository.findByFilter({
+      email: inviteUser.email,
+    });
+
+    if (!user) {
+      throw new CustomerException(
+        `User with email ${inviteUser.email} not found`,
+        404,
+      );
+    }
 
     await this.notificationsRepository.createNotification({
       sender_id: inviteUser.invited_by_id,
