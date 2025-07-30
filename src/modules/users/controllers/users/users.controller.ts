@@ -36,6 +36,7 @@ export class UsersController {
     const user = {
       name: createUser.name,
       email: createUser.email,
+      password: createUser.password,
     };
 
     const newUser = await this.createUsersService.execute(user);
