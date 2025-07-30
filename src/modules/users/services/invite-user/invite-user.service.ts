@@ -15,7 +15,7 @@ export class InviteUserService {
   constructor(
     private readonly inviteUsersRepository: InviteUsersRepository,
     private readonly notificationsRepository: NotificationsRepository,
-    private readonly usersRepository: UsersRepository, // Assuming this is the correct repository for user-related operations
+    private readonly usersRepository: UsersRepository,
   ) {}
 
   public async execute(inviteUser: InviteUserRequest): Promise<void> {
