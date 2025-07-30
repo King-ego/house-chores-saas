@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PostgresClient, PrismaOrm } from '../../../shared/prisma/prisma.orm';
-import { CreateUserContractor } from '../contractors/create-user.contractor';
+import { InviteUserContractor } from '../contractors/invite-user.contractor';
 import { CreateInviteUserInput } from '../contractors/inputs/invite-user-property-inputs';
 
 @Injectable()
-export class InviteUsersRepository implements CreateUserContractor {
+export class InviteUsersRepository implements InviteUserContractor {
   private readonly postgresOrm: PostgresClient;
 
   constructor() {
