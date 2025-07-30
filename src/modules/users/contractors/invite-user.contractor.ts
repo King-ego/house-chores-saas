@@ -1,5 +1,5 @@
 import { CreateInviteUserInput } from './inputs/invite-user-property-inputs';
 
-export interface CreateUserContractor {
+export interface InviteUserContractor {
   createInviteUser: (createInvite: CreateInviteUserInput) => Promise<void>;
 }
