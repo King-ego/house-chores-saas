@@ -29,7 +29,7 @@ export class PropertyRepositories implements PropertyContractor {
     });
   }
 
-  public async get_property_by_id(data: {
+  public async get_property_by_user_id(data: {
     user_id: string;
   }): Promise<Property | null> {
     return this.postgresOrm.property.findFirst({
