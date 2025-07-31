@@ -31,10 +31,10 @@ export class PropertyRepositories implements PropertyContractor {
 
   public async get_property_by_user_id(data: {
     user_id: string;
-  }): Promise<Property | null> {
-    return this.postgresOrm.property.findFirst({
-      where: { users: { some: { id: data.user_id } } },
-      include: { users: true },
-    });
+  }): Promise<Property[]> {
+    const { user_id } = data;
+    return this.postgresOrm.$queryRaw<Property[]>`
+      SELECT * FROM properties p WHERE p.created_by = ${user_id}
+    `;
   }
 }
