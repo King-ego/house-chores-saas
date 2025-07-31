@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { CreatePropertyDto } from '../../dto/createPropertyDto';
 import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
 
@@ -21,4 +21,13 @@ export class PropertiesController {
 
     return { property: newProperty };
   }
+
+  /*@Get('/users/:userId')
+  public async listPropertiesByUserId(@Param('user_id') user_id: string) {
+    const user = {
+      user_id,
+    }
+
+
+  }*/
 }
