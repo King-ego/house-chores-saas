@@ -1,11 +1,13 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { CreatePropertyDto } from '../../dto/createPropertyDto';
 import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
+import { ListPropertyByUserIdService } from '../../services/list-property-by-user-id/list-property-by-user-id.service';
 
 @Controller('properties')
 export class PropertiesController {
   constructor(
     private readonly createPropertiesServicesService: CreatePropertiesService,
+    private readonly listPropertyByUserId: ListPropertyByUserIdService,
   ) {}
 
   @Post('')
@@ -22,12 +24,13 @@ export class PropertiesController {
     return { property: newProperty };
   }
 
-  /*@Get('/users/:userId')
+  @Get('/users/:user_id')
   public async listPropertiesByUserId(@Param('user_id') user_id: string) {
     const user = {
       user_id,
-    }
+    };
 
-
-  }*/
+    const properties = await this.listPropertyByUserId.execute(user);
+    return { properties };
+  }
 }
