@@ -11,7 +11,7 @@ interface InviteUserRequest {
 }
 
 @Injectable()
-export class InviteUserService {
+export class SendInviteUserService {
   constructor(
     private readonly inviteUsersRepository: InviteUsersRepository,
     private readonly notificationsRepository: NotificationsRepository,
