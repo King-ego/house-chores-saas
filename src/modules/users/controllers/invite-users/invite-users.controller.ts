@@ -20,7 +20,7 @@ export class InviteUsersController {
 
     await this.sendInviteUserService.execute(invite);
 
-    return { message: 'This action invites a user by property 2' };
+    return { message: 'This action invites a user by property' };
   }
 
   @Post('/accept/:invite_id')
