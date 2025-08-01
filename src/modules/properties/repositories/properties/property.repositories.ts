@@ -37,8 +37,8 @@ export class PropertyRepositories implements PropertyContractor {
     return this.postgresOrm.$queryRaw<Property[]>`
       SELECT * 
       FROM properties p 
-      LEFT JOIN property_users pu ON pu."A" = p.id
-      WHERE p.created_by = ${user_id} OR pu."B" = ${user_id}
+      LEFT JOIN "_UserProperties" pu ON pu."B" = p.id
+      WHERE p.created_by = ${user_id} OR pu."A" = ${user_id}
     `;
   }
 }
