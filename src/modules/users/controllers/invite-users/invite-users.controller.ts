@@ -4,7 +4,7 @@ import { SendInviteUserService } from '../../services/send-invite-user/send-invi
 
 @Controller('invite-users')
 export class InviteUsersController {
-  constructor(private readonly inviteUserService: SendInviteUserService) {}
+  constructor(private readonly sendInviteUserService: SendInviteUserService) {}
 
   @Post('/')
   public async inviteUserByProperty(@Body() inviteUser: InviteUserPropertyDto) {
@@ -14,7 +14,7 @@ export class InviteUsersController {
       email: inviteUser.email,
     };
 
-    await this.inviteUserService.execute(invite);
+    await this.sendInviteUserService.execute(invite);
 
     return { message: 'This action invites a user by property 2' };
   }
