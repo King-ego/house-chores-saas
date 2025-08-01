@@ -6,6 +6,7 @@ export class AcceptInviteService {
   constructor(private readonly inviteUserRepository: InviteUsersRepository) {}
 
   public async execute(invite_id: string) {
+    //continuar aqui
     const invite = await this.inviteUserRepository.inviteUserById(invite_id);
 
   }
