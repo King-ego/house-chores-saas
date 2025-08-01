@@ -1,10 +1,14 @@
 import { Body, Controller, Post, Param } from '@nestjs/common';
 import { InviteUserPropertyDto } from '../../dto/invite-user-property.dto';
 import { SendInviteUserService } from '../../services/send-invite-user/send-invite-user.service';
+import { AcceptInviteService } from '../../services/accept-invite/accept-invite.service';
 
 @Controller('invite-users')
 export class InviteUsersController {
-  constructor(private readonly sendInviteUserService: SendInviteUserService) {}
+  constructor(
+    private readonly sendInviteUserService: SendInviteUserService,
+    private readonly acceptInviteService: AcceptInviteService,
+  ) {}
 
   @Post('/')
   public async inviteUserByProperty(@Body() inviteUser: InviteUserPropertyDto) {
@@ -20,8 +24,8 @@ export class InviteUsersController {
   }
 
   @Post('/accept/:invite_id')
-  public acceptInvite(@Param('invite_id') invite_id: string) {
-    /* await this.inviteUserService.acceptInvite(invite_id);*/
+  public async acceptInvite(@Param('invite_id') invite_id: string) {
+    await this.acceptInviteService.execute(invite_id);
     console.log(invite_id);
     return { message: 'Invite accepted successfully' };
   }
