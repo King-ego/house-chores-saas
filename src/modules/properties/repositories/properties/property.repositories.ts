@@ -33,8 +33,12 @@ export class PropertyRepositories implements PropertyContractor {
     user_id: string;
   }): Promise<Property[]> {
     const { user_id } = data;
+    // This query retrieves all properties created by a specific user
     return this.postgresOrm.$queryRaw<Property[]>`
-      SELECT * FROM properties p WHERE p.created_by = ${user_id}
+      SELECT * 
+      FROM properties p 
+      LEFT JOIN property_users pu ON pu."A" = p.id
+      WHERE p.created_by = ${user_id} OR pu."B" = ${user_id}
     `;
   }
 }
