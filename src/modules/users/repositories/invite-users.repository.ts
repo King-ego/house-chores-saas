@@ -29,4 +29,10 @@ export class InviteUsersRepository implements InviteUserContractor {
       where: { id: invite_id },
     });
   }
+
+  public async deleteInviteUser(invite_id: string): Promise<void> {
+    await this.postgresOrm.inviteUser.delete({
+      where: { id: invite_id },
+    });
+  }
 }
