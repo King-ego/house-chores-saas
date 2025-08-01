@@ -26,7 +26,6 @@ export class InviteUsersController {
   @Post('/accept/:invite_id')
   public async acceptInvite(@Param('invite_id') invite_id: string) {
     await this.acceptInviteService.execute(invite_id);
-    console.log(invite_id);
     return { message: 'Invite accepted successfully' };
   }
 }
