@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PostgresClient, PrismaOrm } from '../../../shared/prisma/prisma.orm';
 import { InviteUserContractor } from '../contractors/invite-user.contractor';
 import { CreateInviteUserInput } from '../contractors/inputs/invite-user-property-inputs';
+import { InviteUser } from '../../../../prisma/generated/client/postgres';
 
 @Injectable()
 export class InviteUsersRepository implements InviteUserContractor {
@@ -20,6 +21,12 @@ export class InviteUsersRepository implements InviteUserContractor {
         property_id,
         expires_at,
       },
+    });
+  }
+
+  public async inviteUserById(invite_id: string): Promise<InviteUser | null> {
+    return this.postgresOrm.inviteUser.findUnique({
+      where: { id: invite_id },
     });
   }
 }
