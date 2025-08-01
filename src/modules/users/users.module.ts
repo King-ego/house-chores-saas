@@ -8,6 +8,7 @@ import { InviteUsersController } from './controllers/invite-users/invite-users.c
 import { NotificationsRepositoryModule } from '../notifications/repositories/notifications.repository.module';
 import { PasswordService } from './services/password/password.service';
 import { AcceptInviteService } from './services/accept-invite/accept-invite.service';
+import { SessionService } from './services/session/session.service';
 
 @Module({
   controllers: [UsersController, InviteUsersController],
@@ -17,6 +18,7 @@ import { AcceptInviteService } from './services/accept-invite/accept-invite.serv
     SendInviteUserService,
     PasswordService,
     AcceptInviteService,
+    SessionService,
   ],
   imports: [UsersRepositoryModule, NotificationsRepositoryModule],
 })
