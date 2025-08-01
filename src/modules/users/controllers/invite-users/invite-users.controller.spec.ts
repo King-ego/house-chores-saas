@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InviteUsersController } from './invite-users.controller';
-import { InviteUserService } from '../../services/invite-user/invite-user.service';
+import { SendInviteUserService } from '../../services/send-invite-user/send-invite-user.service';
 import { randomUUID } from 'crypto';
 
 describe('InviteUsersController', () => {
   let controller: InviteUsersController;
-  let inviteUserService: jest.Mocked<InviteUserService>;
+  let inviteUserService: jest.Mocked<SendInviteUserService>;
 
   beforeEach(async () => {
     const mockInviteUserService = {
@@ -16,7 +16,7 @@ describe('InviteUsersController', () => {
       controllers: [InviteUsersController],
       providers: [
         {
-          provide: InviteUserService,
+          provide: SendInviteUserService,
           useValue: mockInviteUserService,
         },
       ],
@@ -24,7 +24,7 @@ describe('InviteUsersController', () => {
 
     controller = module.get<InviteUsersController>(InviteUsersController);
     inviteUserService =
-      module.get<jest.Mocked<InviteUserService>>(InviteUserService);
+      module.get<jest.Mocked<SendInviteUserService>>(SendInviteUserService);
   });
 
   it('should be defined', () => {
