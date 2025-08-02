@@ -42,4 +42,10 @@ export class UsersController {
     const newUser = await this.createUsersService.execute(user);
     return { user: newUser };
   }
+
+  @Post('/session')
+  public createSession() {
+    // This method is not implemented yet
+    return { message: 'This action creates a session for a user' };
+  }
 }
