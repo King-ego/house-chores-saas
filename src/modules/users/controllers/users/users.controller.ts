@@ -5,11 +5,13 @@ import {
   Post,
   Param,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ListUsersByIdService } from '../../services/list-users-by-id/list-users-by-id.service';
 import { User } from '../../../../../prisma/generated/client/postgres';
 import { CreateUserService } from '../../services/create-user/create-user.service';
 import { CreateUserDto } from '../../dto/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UsersController {
@@ -24,6 +26,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   public async findOne(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<User> {
