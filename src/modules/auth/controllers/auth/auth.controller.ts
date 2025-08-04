@@ -14,7 +14,6 @@ export class AuthController {
     };
 
     const token = await this.createAuthService.login(user);
-    console.log(token);
     /*return { access_token: token.access_token };*/
   }
 }
