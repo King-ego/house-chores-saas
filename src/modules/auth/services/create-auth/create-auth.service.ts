@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UsersRepository } from '../../../users/repositories/users.repository';
 
 interface IUser {
   email: string;
@@ -8,12 +9,18 @@ interface IUser {
 
 @Injectable()
 export class CreateAuthService {
-  constructor(private readonly jwtService: JwtService,) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly usersRepository: UsersRepository,
+  ) {}
 
-  public async login(user: IUser) {
-    /*const payload = { email: user.email, sub: user.id };
+  public async login(data: IUser) {
+    const user = await this.usersRepository.findByFilter({
+      email: data.email,
+    });
+    const payload = { email: data.email, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
-    };*/
+    };
   }
 }
