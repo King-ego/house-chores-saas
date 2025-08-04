@@ -15,13 +15,15 @@ export class UsersRepository implements UserContractor {
 
   public async findByFilter(data: FindByFilterUserInput): Promise<User> {
     const { id, email } = data;
-    return this.postgresOrm.$queryRaw`
+    const user = await this.postgresOrm.$queryRaw<User[]>`
       SELECT *
       FROM users
-      WHERE 
-        users.id = ${id}
-        OR users.email = ${email};
+      WHERE users.id = ${id}
+         OR users.email = ${email}
+      LIMIT 1
     `;
+
+    return user[0];
   }
 
   public async createUser(user: CreateUserInput): Promise<User> {
