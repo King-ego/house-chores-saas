@@ -3,6 +3,7 @@ import { AuthController } from './controllers/auth/auth.controller';
 import { CreateAuthService } from './services/create-auth/create-auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersRepositoryModule } from '../users/repositories/users.repository.module';
+import { PasswordService } from '../users/services/password/password.service';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { UsersRepositoryModule } from '../users/repositories/users.repository.mo
     UsersRepositoryModule,
   ],
   controllers: [AuthController],
-  providers: [CreateAuthService],
+  providers: [CreateAuthService, PasswordService],
   exports: [CreateAuthService],
 })
 export class AuthModule {}
