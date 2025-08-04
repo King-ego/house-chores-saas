@@ -13,7 +13,8 @@ interface IUser {
 export class CreateAuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly usersRepository: UsersRepository
+    private readonly usersRepository: UsersRepository,
+    private readonly passwordService: PasswordService,
   ) {}
 
   public async login(data: IUser) {
@@ -25,6 +26,13 @@ export class CreateAuthService {
       throw new CustomerException('Password or email is incorrect', 401);
     }
 
+    const validPassword = await this.passwordService.comparePasswords(
+      data.password,
+      user.password,
+    );
+    if (!validPassword) {
+      throw new CustomerException('Password or email is incorrect', 401);
+    }
 
     const payload = { email: data.email, sub: user.id };
     return {
