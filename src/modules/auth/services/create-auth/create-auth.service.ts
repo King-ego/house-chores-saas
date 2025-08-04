@@ -26,11 +26,6 @@ export class CreateAuthService {
       throw new CustomerException('Password or email is incorrect', 401);
     }
 
-    console.log({
-      data: data.password,
-      user: user.password,
-    });
-
     const validPassword = await this.passwordService.comparePasswords(
       data.password,
       user.password,
