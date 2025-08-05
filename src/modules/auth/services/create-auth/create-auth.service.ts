@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersRepository } from '../../../users/repositories/users.repository';
+import { UsersRepository } from '../../../users/repositories/users/users.repository';
 import { CustomerException } from '../../../../shared/errors/customerException';
 import { PasswordService } from '../../../users/services/password/password.service';
 
