@@ -1,7 +1,8 @@
-import { Body, Controller, Post, Param } from '@nestjs/common';
+import { Body, Controller, Post, Param, UseGuards } from '@nestjs/common';
 import { InviteUserPropertyDto } from '../../dto/invite-user-property.dto';
 import { SendInviteUserService } from '../../services/send-invite-user/send-invite-user.service';
 import { AcceptInviteService } from '../../services/accept-invite/accept-invite.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('invite-users')
 export class InviteUsersController {
@@ -22,7 +23,7 @@ export class InviteUsersController {
 
     return { message: 'This action invites a user by property' };
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Post('/accept/:invite_id')
   public async acceptInvite(@Param('invite_id') invite_id: string) {
     await this.acceptInviteService.execute(invite_id);
