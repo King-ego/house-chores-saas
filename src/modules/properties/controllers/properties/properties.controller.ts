@@ -25,7 +25,7 @@ export class PropertiesController {
 
     return { property: newProperty };
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get('/users/:user_id')
   public async listPropertiesByUserId(@Param('user_id') user_id: string) {
     const user = {
