@@ -13,9 +13,9 @@ export class AuthController {
       password: userAuth.password,
     };
 
-    const token = await this.createAuthService.login(user);
+    const auth = await this.createAuthService.login(user);
 
-    return token;
+    return auth;
     /*return { access_token: token.access_token };*/
   }
 }
