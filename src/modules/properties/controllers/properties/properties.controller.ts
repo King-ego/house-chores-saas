@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, UseGuards } from '@nestjs/common';
 import { CreatePropertyDto } from '../../dto/createPropertyDto';
 import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
 import { ListPropertyByUserIdService } from '../../services/list-property-by-user-id/list-property-by-user-id.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('properties')
 export class PropertiesController {
@@ -10,6 +11,7 @@ export class PropertiesController {
     private readonly listPropertyByUserId: ListPropertyByUserIdService,
   ) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('')
   public async createProperty(@Body() createPropertyDto: CreatePropertyDto) {
     const property = {
