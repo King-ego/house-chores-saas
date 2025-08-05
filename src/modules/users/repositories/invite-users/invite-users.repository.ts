@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { PostgresClient, PrismaOrm } from '../../../shared/prisma/prisma.orm';
-import { InviteUserContractor } from '../contractors/invite-user.contractor';
-import { CreateInviteUserInput } from '../contractors/inputs/invite-user-property-inputs';
-import { InviteUser } from '../../../../prisma/generated/client/postgres';
-import { AcceptInviteInput } from '../contractors/inputs/accept-invite-input';
+import {
+  PostgresClient,
+  PrismaOrm,
+} from '../../../../shared/prisma/prisma.orm';
+import { InviteUserContractor } from '../../contractors/invite-user.contractor';
+import { CreateInviteUserInput } from '../../contractors/inputs/invite-user-property-inputs';
+import { InviteUser } from '../../../../../prisma/generated/client/postgres';
+import { AcceptInviteInput } from '../../contractors/inputs/accept-invite-input';
 
 @Injectable()
 export class InviteUsersRepository implements InviteUserContractor {
@@ -41,8 +44,7 @@ export class InviteUsersRepository implements InviteUserContractor {
     const { user_id, property_id } = data;
     await this.postgresOrm.$executeRaw`
       INSERT INTO "_UserProperties" ("A", "B")
-      VALUES (${property_id}, ${user_id})
-      ON CONFLICT DO NOTHING;
+      VALUES (${property_id}, ${user_id}) ON CONFLICT DO NOTHING;
     `;
   }
 }
