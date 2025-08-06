@@ -39,6 +39,7 @@ export class UsersController {
     };
 
     const newUser = await this.createUsersService.execute(user);
+
     return { user: newUser };
   }
 }
