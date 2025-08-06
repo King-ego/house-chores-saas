@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InviteUsersRepository } from '../../repositories/invite-users.repository';
+import { InviteUsersRepository } from '../../repositories/invite-users/invite-users.repository';
 import { NotificationsRepository } from '../../../notifications/repositories/notifications/notifications.repository';
-import { UsersRepository } from '../../repositories/users.repository';
+import { UsersRepository } from '../../repositories/users/users.repository';
 import { CustomerException } from '../../../../shared/errors/customerException';
 
 interface InviteUserRequest {
