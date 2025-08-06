@@ -23,9 +23,10 @@ export class UsersController {
   @Get('/:user_id')
   @UseGuards(AuthGuard('jwt'))
   public async findOne(
-    @Param('user_id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('user_id', new ParseUUIDPipe({ version: '4' })) user_id: string,
   ): Promise<User> {
-    const user = await this.listUsersService.execute(id);
+    const user = await this.listUsersService.execute(user_id);
+
     return user;
   }
 
