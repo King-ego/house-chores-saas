@@ -20,11 +20,6 @@ export class UsersController {
     private readonly listUsersService: ListUsersByIdService,
   ) {}
 
-  @Get()
-  findAll(): string {
-    return 'This action returns all users12';
-  }
-
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   public async findOne(
