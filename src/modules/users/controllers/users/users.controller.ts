@@ -20,6 +20,11 @@ export class UsersController {
     private readonly listUsersService: ListUsersByIdService,
   ) {}
 
+  @Get('/user_id')
+  findUserById(@Param('user_id') user_id: string) {
+    console.log({ user_id });
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   public async findOne(
