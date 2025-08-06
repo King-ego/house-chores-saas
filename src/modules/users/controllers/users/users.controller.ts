@@ -20,15 +20,10 @@ export class UsersController {
     private readonly listUsersService: ListUsersByIdService,
   ) {}
 
-  @Get('/user_id')
-  findUserById(@Param('user_id') user_id: string) {
-    console.log({ user_id });
-  }
-
-  @Get(':id')
+  @Get('/:user_id')
   @UseGuards(AuthGuard('jwt'))
   public async findOne(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('user_id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<User> {
     const user = await this.listUsersService.execute(id);
     return user;
