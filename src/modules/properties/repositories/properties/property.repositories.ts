@@ -48,6 +48,13 @@ export class PropertyRepositories implements PropertyContractor {
 
     await this.postgresOrm.$executeRaw`
       DELETE
+      FROM "_UserProperties"
+      WHERE "A" = ${property_id}
+         OR "B" = ${property_id}
+    `;
+
+    await this.postgresOrm.$executeRaw`
+      DELETE
       FROM properties
       where property_id = ${property_id}`;
   }
