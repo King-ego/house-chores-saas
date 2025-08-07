@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  UseGuards,
+  Delete,
+} from '@nestjs/common';
 import { CreatePropertyDto } from '../../dto/createPropertyDto';
 import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
 import { ListPropertyByUserIdService } from '../../services/list-property-by-user-id/list-property-by-user-id.service';
@@ -25,6 +33,7 @@ export class PropertiesController {
 
     return { property: newProperty };
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Get('/users/:user_id')
   public async listPropertiesByUserId(@Param('user_id') user_id: string) {
@@ -34,5 +43,11 @@ export class PropertiesController {
 
     const properties = await this.listPropertyByUserId.execute(user);
     return { properties };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('/:property_id')
+  public deleteProperty(@Param('property_id') property_id: string) {
+    console.log(property_id);
   }
 }
