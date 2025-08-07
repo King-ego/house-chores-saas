@@ -46,16 +46,17 @@ export class PropertyRepositories implements PropertyContractor {
   public async delete_property(data: { property_id: string }): Promise<void> {
     const { property_id } = data;
 
-    await this.postgresOrm.$executeRaw`
-      DELETE
-      FROM "_UserProperties"
-      WHERE "A" = ${property_id}
-         OR "B" = ${property_id}
-    `;
-
-    await this.postgresOrm.$executeRaw`
-      DELETE
-      FROM properties
-      where property_id = ${property_id}`;
+    await this.postgresOrm.$transaction([
+      this.postgresOrm.$executeRaw`
+        DELETE
+        FROM "_UserProperties"
+        WHERE "A" = ${property_id}
+           OR "B" = ${property_id}
+      `,
+      this.postgresOrm.$executeRaw`
+        DELETE
+        FROM properties
+        where property_id = ${property_id}`,
+    ]);
   }
 }
