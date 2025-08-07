@@ -42,4 +42,13 @@ export class PropertyRepositories implements PropertyContractor {
          OR pu."A" = ${user_id}
     `;
   }
+
+  public async delete_property(data: { property_id: string }): Promise<void> {
+    const { property_id } = data;
+
+    await this.postgresOrm.$executeRaw`
+      DELETE
+      FROM properties
+      where property_id = ${property_id}`;
+  }
 }
