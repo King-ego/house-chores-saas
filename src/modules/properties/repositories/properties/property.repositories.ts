@@ -6,6 +6,7 @@ import {
 import PropertyContractor from '../../contractors/property.contractor';
 import CreatePropertyInput from '../../contractors/inputs/create.property.input';
 import { Property } from '../../../../../prisma/generated/client/postgres';
+import { FindPropertyByFilterInput } from '../../contractors/inputs/findPropertyByFilter.input';
 
 @Injectable()
 export class PropertyRepositories implements PropertyContractor {
@@ -58,5 +59,19 @@ export class PropertyRepositories implements PropertyContractor {
         FROM properties
         where property_id = ${property_id}`,
     ]);
+  }
+
+  public async findByFilter(
+    data: FindPropertyByFilterInput,
+  ): Promise<Property> {
+    const { property_id } = data;
+
+    const property = await this.postgresOrm.$queryRaw<Property[]>`
+      SELECT *
+      FROM properties p
+      WHERE p.id = ${property_id} LIMIT 1
+    `;
+
+    return property[0];
   }
 }
