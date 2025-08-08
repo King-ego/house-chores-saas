@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { NotificationsRepository } from '../../repositories/notifications/notifications.repository';
+import { Notification } from '../../../../../prisma/generated/client/postgres';
 
 interface IRequestListNotificationsId {
   user_id: string;
@@ -6,7 +8,17 @@ interface IRequestListNotificationsId {
 
 @Injectable()
 export class ListNotificationsIdService {
-  public execute(data: IRequestListNotificationsId): string {
-    return `List of notifications for user with ID: ${data.user_id}`;
+  constructor(
+    private readonly notificationsRepository: NotificationsRepository,
+  ) {}
+
+  public async execute(
+    data: IRequestListNotificationsId,
+  ): Promise<Notification[]> {
+    const notifications =
+      await this.notificationsRepository.listNotificationsByUserId(
+        data.user_id,
+      );
+    return notifications;
   }
 }
