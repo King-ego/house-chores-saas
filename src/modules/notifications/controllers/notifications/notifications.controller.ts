@@ -1,10 +1,12 @@
 import { Controller, Get, Param, Delete } from '@nestjs/common';
 import { ListNotificationsIdService } from '../../services/list-notifications-id/list-notifications-id.service';
+import { DeleteNotificationService } from '../../services/delete-notification/delete-notification.service';
 
 @Controller('notifications')
 export class NotificationsController {
   constructor(
     private readonly listNotificationsByIdServices: ListNotificationsIdService,
+    private readonly deleteNotificationService: DeleteNotificationService,
   ) {}
 
   @Get('/:userId')
@@ -16,10 +18,13 @@ export class NotificationsController {
   }
 
   @Delete('/:notification_id')
-  public notificationDetails(@Param('notification_id') notificationId: string) {
+  public async notificationDetails(
+    @Param('notification_id') notificationId: string,
+  ) {
+    await this.deleteNotificationService.execute(notificationId);
+
     return {
-      message: 'Notification details endpoint',
-      notificationId,
+      message: 'Notification delete',
     };
   }
 }
