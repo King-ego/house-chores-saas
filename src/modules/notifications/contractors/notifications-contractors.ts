@@ -4,4 +4,5 @@ import { CreateNotificationInput } from './inputs/create.notification.input';
 export interface NotificationsContractors {
   listNotificationsByUserId(userId: string): Promise<Notification[]>;
   createNotification(_: CreateNotificationInput): Promise<void>;
+  deleteNotification(notificationId: string): Promise<void>;
 }
