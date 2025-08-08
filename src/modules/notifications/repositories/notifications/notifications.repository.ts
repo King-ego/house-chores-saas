@@ -39,4 +39,10 @@ export class NotificationsRepository implements NotificationsContractors {
       },
     });
   }
+
+  public async deleteNotification(notificationId: string): Promise<void> {
+    await this.postgresOrm.notification.delete({
+      where: { id: notificationId },
+    });
+  }
 }
