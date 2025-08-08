@@ -11,12 +11,14 @@ import { CreatePropertyDto } from '../../dto/createPropertyDto';
 import { CreatePropertiesService } from '../../services/create-properties/create-properties.service';
 import { ListPropertyByUserIdService } from '../../services/list-property-by-user-id/list-property-by-user-id.service';
 import { AuthGuard } from '@nestjs/passport';
+import { DeletePropertyService } from '../../services/delete-property/delete-property.service';
 
 @Controller('properties')
 export class PropertiesController {
   constructor(
     private readonly createPropertiesServicesService: CreatePropertiesService,
     private readonly listPropertyByUserId: ListPropertyByUserIdService,
+    private readonly deletePropertyService: DeletePropertyService,
   ) {}
 
   @UseGuards(AuthGuard('jwt'))
@@ -47,7 +49,8 @@ export class PropertiesController {
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('/:property_id')
-  public deleteProperty(@Param('property_id') property_id: string) {
-    console.log(property_id);
+  public async deleteProperty(@Param('property_id') property_id: string) {
+    await this.deletePropertyService.execute(property_id);
+    return { message: 'Property deleted successfully' };
   }
 }
