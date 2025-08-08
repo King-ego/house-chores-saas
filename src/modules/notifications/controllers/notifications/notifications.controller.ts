@@ -10,8 +10,8 @@ export class NotificationsController {
   ) {}
 
   @Get('/:userId')
-  public notifications(@Param('userId') userId: string) {
-    const notifications = this.listNotificationsByIdServices.execute({
+  public async notifications(@Param('userId') userId: string) {
+    const notifications = await this.listNotificationsByIdServices.execute({
       user_id: userId,
     });
     return notifications;
