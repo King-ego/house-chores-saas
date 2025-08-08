@@ -1,13 +1,18 @@
 import { Controller, Get, Param, Delete } from '@nestjs/common';
+import { ListNotificationsIdService } from '../../services/list-notifications-id/list-notifications-id.service';
 
 @Controller('notifications')
 export class NotificationsController {
+  constructor(
+    private readonly listNotificationsByIdServices: ListNotificationsIdService,
+  ) {}
+
   @Get('/:userId')
   public notifications(@Param('userId') userId: string) {
-    return {
-      message: 'Notifications endpoint',
-      userId,
-    };
+    const notifications = this.listNotificationsByIdServices.execute({
+      user_id: userId,
+    });
+    return notifications;
   }
 
   @Delete('/:notification_id')
