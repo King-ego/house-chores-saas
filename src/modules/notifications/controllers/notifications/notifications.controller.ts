@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Delete } from '@nestjs/common';
 
 @Controller('notifications')
 export class NotificationsController {
@@ -7,6 +7,14 @@ export class NotificationsController {
     return {
       message: 'Notifications endpoint',
       userId,
+    };
+  }
+
+  @Delete('/:notification_id')
+  public notificationDetails(@Param('notification_id') notificationId: string) {
+    return {
+      message: 'Notification details endpoint',
+      notificationId,
     };
   }
 }
