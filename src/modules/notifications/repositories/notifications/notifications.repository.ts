@@ -7,6 +7,7 @@ import {
   PrismaOrm,
 } from '../../../../shared/prisma/prisma.orm';
 import { CreateNotificationInput } from '../../contractors/inputs/create.notification.input';
+import { ReadNotificationInput } from '../../contractors/inputs/read-notification.input';
 
 @Injectable()
 export class NotificationsRepository implements NotificationsContractors {
@@ -43,6 +44,13 @@ export class NotificationsRepository implements NotificationsContractors {
   public async deleteNotification(notificationId: string): Promise<void> {
     await this.postgresOrm.notification.delete({
       where: { id: notificationId },
+    });
+  }
+
+  public async readNotification(data: ReadNotificationInput): Promise<void> {
+    await this.postgresOrm.notification.update({
+      where: { id: data.notificationId },
+      data: { read: data.read },
     });
   }
 }
