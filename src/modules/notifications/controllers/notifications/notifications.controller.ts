@@ -24,7 +24,7 @@ export class NotificationsController {
     await this.deleteNotificationService.execute(notificationId);
 
     return {
-      message: 'Notification delete',
+      message: 'Notification was delete',
     };
   }
 }
