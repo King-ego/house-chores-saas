@@ -8,6 +8,7 @@ import {
 } from '../../../../shared/prisma/prisma.orm';
 import { CreateNotificationInput } from '../../contractors/inputs/create.notification.input';
 import { ReadNotificationInput } from '../../contractors/inputs/read-notification.input';
+import { FindByFilterNotification } from '../../contractors/inputs/findByFIlterNotification';
 
 @Injectable()
 export class NotificationsRepository implements NotificationsContractors {
@@ -52,5 +53,17 @@ export class NotificationsRepository implements NotificationsContractors {
       where: { id: data.notificationId },
       data: { read: data.read },
     });
+  }
+
+  public async findByFilter(
+    data: FindByFilterNotification,
+  ): Promise<Notification> {
+    const { notification_id } = data;
+
+    return this.postgresOrm.$queryRaw<Notification>`
+      SELECT *
+      FROM notifications n
+      WHERE (${notification_id} IS NULL OR n.id = ${notification_id})
+    `;
   }
 }
