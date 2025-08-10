@@ -31,10 +31,7 @@ export class SendInviteUserService {
     });
 
     if (!user) {
-      throw new CustomerException(
-        `User with email ${inviteUser.email} not found`,
-        404,
-      );
+      throw new CustomerException(`User not found`, 404);
     }
 
     await this.notificationsRepository.createNotification({
