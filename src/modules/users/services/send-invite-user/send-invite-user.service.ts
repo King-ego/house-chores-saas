@@ -38,7 +38,7 @@ export class SendInviteUserService {
       sender_id: inviteUser.invited_by_id,
       content: 'Você foi convidado para participar de um imóvel',
       receiver_id: user.id,
-      type: 'info',
+      type: 'INFO',
       read: false,
     });
   }
