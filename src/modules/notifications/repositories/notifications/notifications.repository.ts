@@ -60,10 +60,12 @@ export class NotificationsRepository implements NotificationsContractors {
   ): Promise<Notification> {
     const { notification_id } = data;
 
-    return this.postgresOrm.$queryRaw<Notification>`
+    const notification = await this.postgresOrm.$queryRaw<Notification[]>`
       SELECT *
       FROM notifications n
       WHERE (${notification_id} IS NULL OR n.id = ${notification_id})
     `;
+
+    return notification[0];
   }
 }
