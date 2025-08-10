@@ -7,4 +7,5 @@ export interface NotificationsContractors {
   createNotification(_: CreateNotificationInput): Promise<void>;
   deleteNotification(notificationId: string): Promise<void>;
   readNotification(_: ReadNotificationInput): Promise<void>;
+  findByFilter(): Promise<Notification>;
 }
